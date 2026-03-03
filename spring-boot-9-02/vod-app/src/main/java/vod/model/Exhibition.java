@@ -2,22 +2,21 @@ package vod.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-public class Cinema {
+public class Exhibition {
 
     private int id;
     private String name;
     private String logo; //url logo w przypadku UI będzie zaciągany dynamicznie
-    private List<Movie> movies = new ArrayList<>();//struktura kolekcyjna związaną z granymi filmami, uproszczone
+    private List<ArtPiece> artPieces = new ArrayList<>();//struktura kolekcyjna związaną z granymi filmami, uproszczone
 //relacja wiele do wiele
-    public Cinema(int id, String name, String logo) {//konsturktor
+    public Exhibition(int id, String name, String logo) {//konsturktor
         this.id = id;
         this.name = name;
         this.logo = logo;
     }
 
-    public Cinema() {//bezparametrowy
+    public Exhibition() {//bezparametrowy
     }
 //settery, gettery i to String - później będziemy korzystać z wynalazku Lombok
     public int getId() {
@@ -44,21 +43,21 @@ public class Cinema {
         this.logo = logo;
     }
 
-    public List<Movie> getMovies() {
-        return movies;
+    public List<ArtPiece> getArtPieces() {
+        return artPieces;
     }
 
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
+    public void setArtPieces(List<ArtPiece> artPieces) {
+        this.artPieces = artPieces;
     }
 
-    public void addMovie(Movie m) {
-        this.movies.add(m);
+    public void addArtPiece(ArtPiece m) {
+        this.artPieces.add(m);
     }
 
     @Override
     public String toString() {
-        return "Cinema{" +
+        return "Exhibition {" +
                 "name='" + name + '\'' +
                 ", logo='" + logo + '\'' +
                 '}';

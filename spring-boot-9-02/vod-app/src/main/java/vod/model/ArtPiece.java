@@ -3,25 +3,25 @@ package vod.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Movie {
+public class ArtPiece {
 
     private int id;
     private String title;
     private String poster;//url
-    private Director director;//relacja do rezysera - kolejny obiekt danych w uproszczeniu założenie że jeden film ma 1 reżysera
+    private Artist artist;//relacja do rezysera - kolejny obiekt danych w uproszczeniu założenie że jeden film ma 1 reżysera
     private float rating;//rating
-    private List<Cinema> cinemas = new ArrayList<>();
+    private List<Exhibition> exhibitions = new ArrayList<>();
 //relacja wiele do wiele - bidirectional
 
-    public Movie(int id, String title, String poster, Director director, float rating) {
+    public ArtPiece(int id, String title, String poster, Artist artist, float rating) {
         this.id = id;
         this.title = title;
         this.poster = poster;
-        this.director = director;
+        this.artist = artist;
         this.rating = rating;
     }
 
-    public Movie() {
+    public ArtPiece() {
     }
 
     public int getId() {
@@ -48,12 +48,12 @@ public class Movie {
         this.poster = poster;
     }
 
-    public Director getDirector() {
-        return director;
+    public Artist getArtist() {
+        return artist;
     }
 
-    public void setDirector(Director director) {
-        this.director = director;
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 
     public float getRating() {
@@ -64,16 +64,16 @@ public class Movie {
         this.rating = rating;
     }
 
-    public List<Cinema> getCinemas() {
-        return cinemas;
+    public List<Exhibition> getExhibitions() {
+        return exhibitions;
     }
 
-    public void setCinemas(List<Cinema> cinemas) {
-        this.cinemas = cinemas;
+    public void setExhibitions(List<Exhibition> exhibitions) {
+        this.exhibitions = exhibitions;
     }
 
-    public void addCinema(Cinema c) {
-        this.cinemas.add(c);
+    public void addExhibition(Exhibition c) {
+        this.exhibitions.add(c);
     }
 
 
@@ -101,9 +101,9 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{" +
+        return "Art Piece {" +
                 "title='" + title + '\'' +
-                ", director=" + director +
+                ", artist=" + artist +
                 ", rating=" + rating +
                 '}';
     }

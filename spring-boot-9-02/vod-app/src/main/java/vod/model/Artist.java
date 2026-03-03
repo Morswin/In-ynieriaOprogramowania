@@ -3,22 +3,22 @@ package vod.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Director {
+public class Artist {
 
     private int id;
     private String firstName;
     private String lastName;
-    private List<Movie> movies = new ArrayList<>();//relacja 1 do wielu
+    private List<ArtPiece> artPieces = new ArrayList<>();//relacja 1 do wielu
 //listy zeby przey przełączniu na SpringDate nie było komplikacji
 //lista od seta różni się tym że są w niej powtórzenia oraz trzymamy kolejność wrzucania
     //struktury danych wazna rzecz w zachowaniu spójności danych w warstwie aplikacyjnej
-    public Director(int id, String firstName, String lastName) {
+    public Artist(int id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Director() {
+    public Artist() {
     }
 
     public int getId() {
@@ -45,21 +45,21 @@ public class Director {
         this.lastName = lastName;
     }
 
-    public List<Movie> getMovies() {
-        return movies;
+    public List<ArtPiece> getArtPieces() {
+        return artPieces;
     }
 
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
+    public void setArtPieces(List<ArtPiece> artPieces) {
+        this.artPieces = artPieces;
     }
 
-    public void addMovie(Movie m) {
-        this.movies.add(m);
+    public void addArtPiece(ArtPiece m) {
+        this.artPieces.add(m);
     }
 
     @Override
     public String toString() {
-        return "Director{" +
+        return "Artist{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
