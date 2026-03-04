@@ -1,5 +1,6 @@
 package vod.service.impl;
 
+import org.springframework.stereotype.Component;
 import vod.repository.ExhibitionDao;
 import vod.repository.ArtistDao;
 import vod.repository.ArtPieceDao;
@@ -11,6 +12,7 @@ import vod.service.ArtPieceService;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Component
 public class ArtPieceServiceBean implements ArtPieceService {
 
     private static final Logger log = Logger.getLogger(ArtPieceService.class.getName());

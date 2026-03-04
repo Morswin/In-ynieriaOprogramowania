@@ -1,5 +1,7 @@
 package vod.repository.mem;
 
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 import vod.repository.ExhibitionDao;
 import vod.model.Exhibition;
 import vod.model.ArtPiece;
@@ -7,7 +9,8 @@ import vod.model.ArtPiece;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Primary
+@Component
 public class MemExhibitionDao implements ExhibitionDao {
 
     @Override

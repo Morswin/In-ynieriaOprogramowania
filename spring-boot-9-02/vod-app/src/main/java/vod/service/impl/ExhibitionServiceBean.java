@@ -1,5 +1,6 @@
 package vod.service.impl;
 
+import org.springframework.stereotype.Component;
 import vod.model.Exhibition;
 import vod.model.ArtPiece;
 import vod.repository.ExhibitionDao;
@@ -9,6 +10,7 @@ import vod.service.ExhibitionService;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Component
 public class ExhibitionServiceBean implements ExhibitionService {
 
     private static final Logger log = Logger.getLogger(ExhibitionService.class.getName());
