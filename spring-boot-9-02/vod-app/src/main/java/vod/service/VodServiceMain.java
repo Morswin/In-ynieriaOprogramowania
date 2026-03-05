@@ -17,9 +17,9 @@ public class VodServiceMain {
         // service use
         // cinemaservice ma api zwraca wsyzstkie kina
         // tylko że ten serwis trzeba przygotowac, trzeba pozyskać tą usługe.
-        List<Exhibition> exhibitions = service.getAllExhibitions();
-        System.out.println(exhibitions.size() + " exhibitions found:");
-        exhibitions.forEach(System.out::println);
+//        List<Exhibition> exhibitions = service.getAllExhibitions();
+//        System.out.println(exhibitions.size() + " exhibitions found:");
+//        exhibitions.forEach(System.out::println);
 
         String foo = context.getBean(String.class);
         System.out.println("foo string: " + foo);
