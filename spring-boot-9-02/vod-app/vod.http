@@ -1,0 +1,24 @@
+### Get all exhibitions
+GET http://127.0.0.1:8080/webapi/exhibitions
+
+### Get all exhibitions with params
+GET http://127.0.0.1:8080/webapi/exhibitions?phrase=abc
+custom-header: custom-value
+Cookie: some-cookie:some-value
+
+### Get exhibition by id
+GET http://127.0.0.1:8080/webapi/exhibitions/1
+Accept: application/xml
+
+### Get exhibitions by art piece
+GET http://127.0.0.1:8080/webapi/artpiece/1/exhibitions
+Accept: application/json
+
+### Create new exhibition
+POST http://127.0.0.1/webapi/exhibitions
+Content-Type: application/json
+
+{
+    "name": "Jakas nazwa",
+    "logo": "Jakies logo"
+}

@@ -1,6 +1,7 @@
 package vod.service.impl;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import vod.model.Exhibition;
 import vod.model.ArtPiece;
 import vod.repository.ExhibitionDao;
@@ -10,7 +11,7 @@ import vod.service.ExhibitionService;
 import java.util.List;
 import java.util.logging.Logger;
 
-@Component
+@Service
 public class ExhibitionServiceBean implements ExhibitionService {
 
     private static final Logger log = Logger.getLogger(ExhibitionService.class.getName());
@@ -34,6 +35,12 @@ public class ExhibitionServiceBean implements ExhibitionService {
     public List<ArtPiece> getArtPiecesInExhibition(Exhibition c) {
         log.info("searching art pieces displayed in exhibition " + c.getId());
         return artPieceDao.findByExhibition(c);
+    }
+
+    @Override
+    public Exhibition addExhibition(Exhibition e) {
+        log.info("adding new exhibition" + e);
+        return exhibitionDao.save(e);
     }
 
     @Override

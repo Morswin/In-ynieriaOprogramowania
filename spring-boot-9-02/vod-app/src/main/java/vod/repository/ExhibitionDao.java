@@ -13,4 +13,5 @@ public interface ExhibitionDao {
 
     List<Exhibition> findByArtPiece(ArtPiece m);
 
+    Exhibition save(Exhibition exhibition);
 }

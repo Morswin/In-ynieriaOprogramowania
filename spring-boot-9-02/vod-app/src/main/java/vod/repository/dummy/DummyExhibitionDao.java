@@ -23,4 +23,9 @@ public class DummyExhibitionDao implements ExhibitionDao {
     public List<Exhibition> findByArtPiece(ArtPiece m) {
         return List.of();
     }
+
+    @Override
+    public Exhibition save(Exhibition exhibition) {
+        return null;
+    }
 }

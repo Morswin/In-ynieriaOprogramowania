@@ -15,4 +15,5 @@ public interface ExhibitionService {
 
     List<ArtPiece> getArtPiecesInExhibition(Exhibition c);
 
+    Exhibition addExhibition(Exhibition e);
 }
