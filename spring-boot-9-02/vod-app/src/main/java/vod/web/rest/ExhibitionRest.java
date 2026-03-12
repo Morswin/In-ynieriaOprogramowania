@@ -1,16 +1,22 @@
 package vod.web.rest;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.LocaleResolver;
 import vod.model.ArtPiece;
 import vod.model.Exhibition;
 import vod.service.ArtPieceService;
 import vod.service.ExhibitionService;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,6 +25,8 @@ import java.util.List;
 public class ExhibitionRest {
     private final ExhibitionService exhibitionService;
     private final ArtPieceService artPieceService;
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
 
     @GetMapping("/exhibitions")
     List<Exhibition> getExhibitions(
@@ -62,8 +70,18 @@ public class ExhibitionRest {
     }
 
     @PostMapping("/exhibitions")
-    ResponseEntity<Exhibition> addExhibition(@RequestBody Exhibition exhibition) {
+    ResponseEntity<?> addExhibition(@Validated @RequestBody Exhibition exhibition, Errors errors, HttpServletRequest request) {
         log.info("about to add new exhibition {} ", exhibition);
+
+        if (errors.hasErrors()) {
+            Locale locale = localeResolver.resolveLocale(request);
+            String errorMessage = errors.getAllErrors().stream()
+                    .map(oe -> messageSource.getMessage(oe.getCode(), new Object[0], locale))
+//                    .map(oe->oe.toString())
+                    .reduce("errors:\n", (accu, oe) -> accu + oe + "\n");
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
+
         exhibition = exhibitionService.addExhibition(exhibition);
         log.info("new exhibition added {}", exhibition);
         return ResponseEntity.status(HttpStatus.CREATED).body(exhibition);
