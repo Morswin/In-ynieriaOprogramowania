@@ -15,10 +15,30 @@ GET http://127.0.0.1:8080/webapi/artpiece/1/exhibitions
 Accept: application/json
 
 ### Create new exhibition
-POST http://127.0.0.1/webapi/exhibitions
+POST http://127.0.0.1:8080/webapi/exhibitions
 Content-Type: application/json
 
 {
     "name": "Jakas nazwa",
     "logo": "Jakies logo"
+}
+
+### get all art pieces
+GET http://127.0.0.1:8080/webapi/artpieces
+
+### get art piece by id
+GET http://127.0.0.1:8080/webapi/artpieces/8
+
+### get art pieces displayed in exhibition
+GET http://127.0.0.1:8080/webapi/exhibitions/1/artpieces
+
+### create a new art piece
+POST http://127.0.0.1:8080/webapi/artpieces
+Content-Type: application/json
+
+{
+    "title": "IO",
+    "poster": "https://www.kinoteka.pl/img/logo.png",
+    "rating": 4.5,
+    "artistId": 4
 }

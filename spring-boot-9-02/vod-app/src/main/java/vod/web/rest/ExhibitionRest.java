@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
 import vod.model.ArtPiece;
@@ -27,6 +28,10 @@ public class ExhibitionRest {
     private final ArtPieceService artPieceService;
     private final MessageSource messageSource;
     private final LocaleResolver localeResolver;
+    private final ExhibitionValidator exhibitionValidator;
+
+    @InitBinder
+    void initBinder(WebDataBinder binder) {binder.addValidators(exhibitionValidator);}
 
     @GetMapping("/exhibitions")
     List<Exhibition> getExhibitions(
@@ -76,8 +81,8 @@ public class ExhibitionRest {
         if (errors.hasErrors()) {
             Locale locale = localeResolver.resolveLocale(request);
             String errorMessage = errors.getAllErrors().stream()
-                    .map(oe -> messageSource.getMessage(oe.getCode(), new Object[0], locale))
-//                    .map(oe->oe.toString())
+//                    .map(oe -> messageSource.getMessage(oe.getCode(), new Object[0], locale))
+                    .map(oe->oe.toString())
                     .reduce("errors:\n", (accu, oe) -> accu + oe + "\n");
             return ResponseEntity.badRequest().body(errorMessage);
         }
