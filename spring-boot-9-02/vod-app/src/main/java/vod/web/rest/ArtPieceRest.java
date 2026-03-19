@@ -1,10 +1,13 @@
 package vod.web.rest;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -15,6 +18,7 @@ import vod.service.ExhibitionService;
 import vod.web.rest.dto.ArtPieceDTO;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequiredArgsConstructor
@@ -60,8 +64,17 @@ public class ArtPieceRest {
     }
 
     @PostMapping("/artpieces")
-    ResponseEntity<?> addArtPiece(@RequestBody ArtPieceDTO artPieceDTO) {
+    ResponseEntity<?> addArtPiece(@Validated @RequestBody ArtPieceDTO artPieceDTO, Errors errors, HttpServletRequest request) {
         log.info("about to add an art piece");
+
+        if (errors.hasErrors()) {
+            Locale locale = localeResolver.resolveLocale(request);
+            String errorMessage = errors.getAllErrors().stream()
+                    .map(oe->oe.toString())
+                    .reduce("errors:\n", (accu, oe) -> accu + oe + "\n");
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
+
         ArtPiece artPiece = new ArtPiece();
         artPiece.setTitle(artPieceDTO.getTitle());
         artPiece.setPoster(artPieceDTO.getPoster());

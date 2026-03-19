@@ -42,6 +42,9 @@ public class ExhibitionRest {
         log.info("phrase param: {}", phrase);
         log.info("custom header param: {}", customHeader);
         log.info("some cookie: {}", someCookie);
+        if (phrase!= null && phrase.equals("foo")) {
+            throw new IllegalArgumentException("Foo!");
+        }
         List<Exhibition> exhibitions = exhibitionService.getAllExhibitions();
         log.info("{} exhibitions found", exhibitions.size());
         return  exhibitions;
