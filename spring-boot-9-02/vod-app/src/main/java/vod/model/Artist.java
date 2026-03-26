@@ -1,15 +1,22 @@
 package vod.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "artist")
 public class Artist {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name="firstname")
     private String firstName;
+    @Column(name = "lastname")
     private String lastName;
+    @OneToMany(mappedBy = "artist")
     @JsonIgnore
     private List<ArtPiece> artPieces = new ArrayList<>();//relacja 1 do wielu
 //listy zeby przey przełączniu na SpringDate nie było komplikacji

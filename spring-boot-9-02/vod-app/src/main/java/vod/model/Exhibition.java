@@ -1,19 +1,26 @@
 package vod.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "exhibition")
 public class Exhibition {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
     @Size(min = 2, max = 20)
     private String name;
+    @Column(name = "logo")
     private String logo; //url logo w przypadku UI będzie zaciągany dynamicznie
+    @ManyToMany(mappedBy = "exhibitions")
     @JsonIgnore
     private List<ArtPiece> artPieces = new ArrayList<>();//struktura kolekcyjna związaną z granymi filmami, uproszczone
 //relacja wiele do wiele

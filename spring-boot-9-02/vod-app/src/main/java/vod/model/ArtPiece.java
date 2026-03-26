@@ -1,15 +1,29 @@
 package vod.model;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "artpiece")
 public class ArtPiece {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     private String poster;//url
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
     private Artist artist;//relacja do rezysera - kolejny obiekt danych w uproszczeniu założenie że jeden film ma 1 reżysera
     private float rating;//rating
+
+    @ManyToMany
+    @JoinTable(
+            name = "artpiece_exhibition",
+            joinColumns = @JoinColumn(name = "artpiece_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "exhibition_id", referencedColumnName = "id")
+    )
     private List<Exhibition> exhibitions = new ArrayList<>();
 //relacja wiele do wiele - bidirectional
 

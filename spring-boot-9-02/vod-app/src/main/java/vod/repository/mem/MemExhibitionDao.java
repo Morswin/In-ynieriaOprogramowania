@@ -10,7 +10,7 @@ import vod.model.ArtPiece;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Primary
+//@Primary
 @Repository
 public class MemExhibitionDao implements ExhibitionDao {
 
