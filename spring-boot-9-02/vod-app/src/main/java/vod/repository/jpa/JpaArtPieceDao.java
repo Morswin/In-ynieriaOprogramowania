@@ -12,7 +12,6 @@ import vod.repository.ArtPieceDao;
 import java.util.List;
 
 @Repository
-@Primary
 public class JpaArtPieceDao implements ArtPieceDao {
     @PersistenceContext
     private EntityManager entityManager;

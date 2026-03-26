@@ -1,7 +1,14 @@
 package vod.service.impl;
 
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
+import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import vod.repository.ExhibitionDao;
 import vod.repository.ArtistDao;
 import vod.repository.ArtPieceDao;
@@ -14,6 +21,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Service
+@RequiredArgsConstructor
 public class ArtPieceServiceBean implements ArtPieceService {
 
     private static final Logger log = Logger.getLogger(ArtPieceService.class.getName());
@@ -22,11 +30,12 @@ public class ArtPieceServiceBean implements ArtPieceService {
     private ExhibitionDao exhibitionDao;
     private ArtPieceDao artPieceDao;
 
-    public ArtPieceServiceBean(ArtistDao artistDao, ExhibitionDao exhibitionDao, ArtPieceDao artPieceDao) {
-        this.artistDao = artistDao;
-        this.exhibitionDao = exhibitionDao;
-        this.artPieceDao = artPieceDao;
-    }
+//    public ArtPieceServiceBean(ArtistDao artistDao, ExhibitionDao exhibitionDao, ArtPieceDao artPieceDao, DataSourceTransactionManager transactionManager) {
+//        this.artistDao = artistDao;
+//        this.exhibitionDao = exhibitionDao;
+//        this.artPieceDao = artPieceDao;
+//        this.transactionManager = transactionManager;
+//    }
 
     public List<ArtPiece> getAllArtPieces() {
         log.info("searching all art pieces...");
@@ -73,11 +82,33 @@ public class ArtPieceServiceBean implements ArtPieceService {
         return artistDao.findById(id);
     }
 
+    @Transactional
     @Override
-    public ArtPiece addArtPiece(ArtPiece m) {
-        log.info("about to add art piece " + m);
-        return artPieceDao.add(m);
+    public ArtPiece addArtPiece(ArtPiece a) {
+        log.info("about to add art piece " + a);
+        a = artPieceDao.add(a);
+        if (a.getTitle().equals("Apocalypse Now")) {
+            throw new RuntimeException("not yet!");
+        }
+        return a;
     }
+
+//    @Override
+//    public ArtPiece addArtPiece(ArtPiece m) {
+//        log.info("about to add art piece " + m);
+//        TransactionStatus ts = transactionManager.getTransaction(new DefaultTransactionDefinition());
+//        try {
+//            m = artPieceDao.add(m);
+//            if (m.getTitle().equals("Apocalypse Now")) {
+//                throw new RuntimeException("not yet!");
+//            }
+//            transactionManager.commit(ts);
+//        } catch (RuntimeException e) {
+//            transactionManager.rollback(ts);
+//            throw e;
+//        }
+//        return m;
+//    }
 
     @Override
     public Artist addArtist(Artist d) {
