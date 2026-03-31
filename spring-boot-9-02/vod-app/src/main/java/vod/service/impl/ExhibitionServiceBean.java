@@ -1,5 +1,6 @@
 package vod.service.impl;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import vod.model.Exhibition;
@@ -37,6 +38,7 @@ public class ExhibitionServiceBean implements ExhibitionService {
         return artPieceDao.findByExhibition(c);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public Exhibition addExhibition(Exhibition e) {
         log.info("adding new exhibition" + e);

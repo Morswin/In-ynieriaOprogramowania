@@ -7,7 +7,7 @@ import vod.model.Exhibition;
 
 import java.util.List;
 
-public interface ArtPieceRepositiory extends JpaRepository<ArtPiece, Integer> {
+public interface ArtPieceRepository extends JpaRepository<ArtPiece, Integer> {
     List<ArtPiece> findAllByArtist(Artist d);
 
     List<ArtPiece> findAllByExhibitionsContaining(Exhibition d);

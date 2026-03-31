@@ -17,20 +17,22 @@ Accept: application/json
 ### Create new exhibition
 POST http://127.0.0.1:8080/webapi/exhibitions
 Content-Type: application/json
+Authorization: Basic dbuser1 dbuser2
 
 {
-    "name": "Jakas nazwa",
-    "logo": "Jakies logo"
+    "name": "Jakas nazwaaa",
+    "logo": "Jakies logao"
 }
 
 ### get all art pieces
 GET http://127.0.0.1:8080/webapi/artpieces
 
 ### get art piece by id
-GET http://127.0.0.1:8080/webapi/artpieces/8
+GET http://127.0.0.1:8080/webapi/artpieces/1
 
 ### get art pieces displayed in exhibition
 GET http://127.0.0.1:8080/webapi/exhibitions/1/artpieces
+Authorization: Basic dbuser1 dbuser1
 
 ### create a new art piece
 POST http://127.0.0.1:8080/webapi/artpieces

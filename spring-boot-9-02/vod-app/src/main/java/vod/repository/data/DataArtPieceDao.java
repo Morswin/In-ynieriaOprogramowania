@@ -18,31 +18,31 @@ import java.util.List;
 public class DataArtPieceDao implements ArtPieceDao {
     @Override
     public List<ArtPiece> findAll() {
-        return repositiory.findAll();
+        return repository.findAll();
     }
 
     @Override
     public ArtPiece findById(int id) {
-        return repositiory.findById(id).orElse(null);
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     public List<ArtPiece> findByArtist(Artist d) {
-        return repositiory.findAllByArtist(d);
+        return repository.findAllByArtist(d);
     }
 
     @Override
     public List<ArtPiece> findByExhibition(Exhibition c) {
-        return repositiory.findAllByExhibitionsContaining(c);
+        return repository.findAllByExhibitionsContaining(c);
     }
 
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
     public ArtPiece add(ArtPiece m) {
-        return repositiory.save(m);
+        return repository.save(m);
     }
 
-    private final ArtPieceRepositiory repositiory;
+    private final ArtPieceRepository repository;
 
 
 }
